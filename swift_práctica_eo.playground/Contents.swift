@@ -114,14 +114,14 @@ class WorldCupTeamRoster {
     var gerenteDeEquipo: String = ""
     var entrenador: String = ""
     
-    init (teamName: String, jugador: String, seleccionadar: String, medico: String, gerente: String, gerenteDeEquipo: String, entrenador: String) {
+    init (teamName: String, jugador: String, seleccionadar: String, medico: String, gerente: String, gerenteDeEquipo: String) {
         self.teamName = teamName
         self.jugador = jugador
         self.seleccionador = seleccionadar
         self.medico = medico
         self.gerente = gerente
         self.gerenteDeEquipo = gerenteDeEquipo
-        self.entrenador = entrenador
+        //self.entrenador = entrenador
     }
 }
 
@@ -134,53 +134,56 @@ class WorldCupTeamRoster {
 */
 
 class WorldCupTeam {
-    var teamID: Int
+    var teamID: Int = 0
     var teamName: String = ""
     var pais: String = ""
     var jugadores: String = ""
     var seleccionador: String = ""
+    //var initialDraw: Int = 0
     
-    init (teamID: Int, teamName: String) {
+    init (teamID: Int = 0, teamName: String) { //}, initialDraw: Int) {
         self.teamID = teamID
         self.teamName = teamName
+        //self.initialDraw = initialDraw
     }
 }
 
-let Argentina: WorldCupTeam = WorldCupTeam(teamID: 1, teamName: "Argentina")
-let Australia: WorldCupTeam = WorldCupTeam(teamID: 2, teamName: "Australia")
-let Belgium: WorldCupTeam = WorldCupTeam(teamID: 3, teamName: "Belgium")
-let Brazil: WorldCupTeam = WorldCupTeam(teamID: 4, teamName: "Brazil")
-let Cameroon: WorldCupTeam = WorldCupTeam(teamID: 5, teamName: "Cameroon")
-let Canada: WorldCupTeam = WorldCupTeam(teamID: 6, teamName: "Canada")
-let CostaRica: WorldCupTeam = WorldCupTeam(teamID: 7, teamName: "Costa Rica")
-let Croatia: WorldCupTeam = WorldCupTeam(teamID: 8, teamName: "Croatia")
-let Denmark: WorldCupTeam = WorldCupTeam(teamID: 9, teamName: "Denmark")
-let Ecuador: WorldCupTeam = WorldCupTeam(teamID: 10, teamName: "Ecuador")
-let England: WorldCupTeam = WorldCupTeam(teamID: 11, teamName: "England")
-let France: WorldCupTeam = WorldCupTeam(teamID: 12, teamName: "France")
-let Germany: WorldCupTeam = WorldCupTeam(teamID: 13, teamName: "Germany")
-let Ghana: WorldCupTeam = WorldCupTeam(teamID: 14, teamName: "Ghana")
-let Iran: WorldCupTeam = WorldCupTeam(teamID: 15, teamName: "Iran")
-let Japan: WorldCupTeam = WorldCupTeam(teamID: 16, teamName: "Japan")
-let Mexico: WorldCupTeam = WorldCupTeam(teamID: 17, teamName: "Mexico")
-let Morocco: WorldCupTeam = WorldCupTeam(teamID: 18, teamName: "Morocco")
+let Argentina: WorldCupTeam   = WorldCupTeam(teamID: 1, teamName: "Argentina")
+let Australia: WorldCupTeam   = WorldCupTeam(teamID: 2, teamName: "Australia")
+let Belgium: WorldCupTeam     = WorldCupTeam(teamID: 3, teamName: "Belgium")
+let Brazil: WorldCupTeam      = WorldCupTeam(teamID: 4, teamName: "Brazil")
+let Cameroon: WorldCupTeam    = WorldCupTeam(teamID: 5, teamName: "Cameroon")
+let Canada: WorldCupTeam      = WorldCupTeam(teamID: 6, teamName: "Canada")
+let CostaRica: WorldCupTeam   = WorldCupTeam(teamID: 7, teamName: "Costa Rica")
+let Croatia: WorldCupTeam     = WorldCupTeam(teamID: 8, teamName: "Croatia")
+let Denmark: WorldCupTeam     = WorldCupTeam(teamID: 9, teamName: "Denmark")
+let Ecuador: WorldCupTeam     = WorldCupTeam(teamID: 10, teamName: "Ecuador")
+let England: WorldCupTeam     = WorldCupTeam(teamID: 11, teamName: "England")
+let France: WorldCupTeam      = WorldCupTeam(teamID: 12, teamName: "France")
+let Germany: WorldCupTeam     = WorldCupTeam(teamID: 13, teamName: "Germany")
+let Ghana: WorldCupTeam       = WorldCupTeam(teamID: 14, teamName: "Ghana")
+let Iran: WorldCupTeam        = WorldCupTeam(teamID: 15, teamName: "Iran")
+let Japan: WorldCupTeam       = WorldCupTeam(teamID: 16, teamName: "Japan")
+let Mexico: WorldCupTeam      = WorldCupTeam(teamID: 17, teamName: "Mexico")
+let Morocco: WorldCupTeam     = WorldCupTeam(teamID: 18, teamName: "Morocco")
 let Netherlands: WorldCupTeam = WorldCupTeam(teamID: 19, teamName: "Netherlands")
-let Poland: WorldCupTeam = WorldCupTeam(teamID: 20, teamName: "Poland")
-let Portugal: WorldCupTeam = WorldCupTeam(teamID: 21, teamName: "Portugal")
-let Qatar: WorldCupTeam = WorldCupTeam(teamID: 22, teamName: "Qatar")
+let Poland: WorldCupTeam      = WorldCupTeam(teamID: 20, teamName: "Poland")
+let Portugal: WorldCupTeam    = WorldCupTeam(teamID: 21, teamName: "Portugal")
+let Qatar: WorldCupTeam       = WorldCupTeam(teamID: 22, teamName: "Qatar")
 let SaudiArabia: WorldCupTeam = WorldCupTeam(teamID: 23, teamName: "Saudi Arabia")
-let Senegal: WorldCupTeam = WorldCupTeam(teamID: 24, teamName: "Senegal")
-let Serbia: WorldCupTeam = WorldCupTeam(teamID: 25, teamName: "Serbia")
-let SouthKorea: WorldCupTeam = WorldCupTeam(teamID: 26, teamName: "South Korea")
-let Spain: WorldCupTeam = WorldCupTeam(teamID: 27, teamName: "Spain")
+let Senegal: WorldCupTeam     = WorldCupTeam(teamID: 24, teamName: "Senegal")
+let Serbia: WorldCupTeam      = WorldCupTeam(teamID: 25, teamName: "Serbia")
+let SouthKorea: WorldCupTeam  = WorldCupTeam(teamID: 26, teamName: "South Korea")
+let Spain: WorldCupTeam       = WorldCupTeam(teamID: 27, teamName: "Spain")
 let Switzerland: WorldCupTeam = WorldCupTeam(teamID: 28, teamName: "Switzerland")
-let Tunisia: WorldCupTeam = WorldCupTeam(teamID: 29, teamName: "Tunisia")
-let Uruguay: WorldCupTeam = WorldCupTeam(teamID: 30, teamName: "Uruguay")
-let USA: WorldCupTeam = WorldCupTeam(teamID: 31, teamName: "USA")
-let Wales: WorldCupTeam = WorldCupTeam(teamID: 32, teamName: "Wales")
+let Tunisia: WorldCupTeam     = WorldCupTeam(teamID: 29, teamName: "Tunisia")
+let Uruguay: WorldCupTeam     = WorldCupTeam(teamID: 30, teamName: "Uruguay")
+let USA: WorldCupTeam         = WorldCupTeam(teamID: 31, teamName: "USA")
+let Wales: WorldCupTeam       = WorldCupTeam(teamID: 32, teamName: "Wales")
  
-//let teams: [WorldCupTeam] = [Argentina, Australia, Belgium, Brazil, Cameroon, Canada, CostaRica, Croatia, Denmark, Ecuador, England, France, Germany, Ghana, Iran, Japan, Mexico, Morocco, Netherlands, Poland, Portugal, Qatar, SaudiArabia, Senegal, Serbia, SouthKorea, Spain, Switzerland, Tunisia, Uruguay, USA, Wales]
+//USA.initialDraw = 2
 
+let teams: [WorldCupTeam] = [Argentina, Australia, Belgium, Brazil, Cameroon, Canada, CostaRica, Croatia, Denmark, Ecuador, England, France, Germany, Ghana, Iran, Japan, Mexico, Morocco, Netherlands, Poland, Portugal, Qatar, SaudiArabia, Senegal, Serbia, SouthKorea, Spain, Switzerland, Tunisia, Uruguay, USA, Wales]
 
 // MARK: - #7
 
@@ -190,7 +193,7 @@ let Wales: WorldCupTeam = WorldCupTeam(teamID: 32, teamName: "Wales")
  EN 7.- Create a class to represent the matches between teams, it must contain attributes such as home team, away team and result as a minimum. Generate a random list of matches from the list of previous teams and make a print of this style per match: Match: Spain 3 - 1 Brazil
  */
 
-class WorldCupGame {
+class WorldCupMatch {
     var matchID: Int = 0
     var datePlayed: String = ""
     var round: String = ""
@@ -217,17 +220,40 @@ class WorldCupGame {
 
 // let matchHomeTeam: WorldCupGame = WorldCupGame.init(matchID: <#T##Int#>, datePlayed: <#T##String#>, round: <#T##String#>, location: <#T##String#>, homeTeam: <#T##String#>, awayTeam: <#T##String#>, homeTeamScore: <#T##Int?#>, awayTeamScore: <#T##Int?#>)
 
-let draw:
+print("\(Argentina.teamID)")
+      
+teams.randomElement()
 
-func drawAssignment {
-    
-    for n 1...32 {
-        let match
-    }
-}
+//for n 1...32 {
+//
+//}
 
-draw
-[
+//teams.forEach { WorldCupTeam in
+//    print("Hi")
+//    print(WorldCupTeam)
+//}
+
+//func draw() {
+//    var series = Array(1...32)
+//
+//
+//    teams.forEach { team in
+//        self.initialDraw = 2 // series.randomElement() ?? <#default value#>
+//    }
+//}
+//
+//func drawPlacement() {
+//    var series = [teams]
+//    var firstTeam = series.randomElement()
+//    series.removeAll { $0 == firstTeam }
+//    var secondTeam = series.randomElement()
+//
+////    for n 1...32 {
+////        let match
+////    }
+//}
+
+
 // MARK: - #8
 
 /*
