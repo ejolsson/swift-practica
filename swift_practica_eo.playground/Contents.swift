@@ -1,4 +1,4 @@
 import UIKit
 
-//Eric Olsson
+//Eric Olsson, 8 dic
 var greeting = "Hello new repo"
