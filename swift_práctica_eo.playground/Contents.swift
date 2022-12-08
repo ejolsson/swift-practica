@@ -126,7 +126,7 @@ class worldCupTeamRoster {
  EN 6.- Create the necessary classes, with the minimum attributes, to represent the soccer teams of the 2022 World Cup, for example: A class that represents the World Cup, we will need it to contain a list of Teams, each team will have its attributes, such as name, country, players, coach, etc.
 */
 
-class worldCupTeam {
+class WorldCupTeam {
     var teamName: String = ""
     var pais: String = ""
     var jugadores: String = ""
@@ -139,6 +139,42 @@ class worldCupTeam {
         self.seleccionador = seleccionadar
     }
 }
+
+let Argentina: WorldCupTeam
+let Australia: WorldCupTeam
+let Belgium: WorldCupTeam
+let Brazil: WorldCupTeam
+let Cameroon: WorldCupTeam
+let Canada: WorldCupTeam
+let CostaRica: WorldCupTeam
+let Croatia: WorldCupTeam
+let Denmark: WorldCupTeam
+let Ecuador: WorldCupTeam
+let England: WorldCupTeam
+let France: WorldCupTeam
+let Germany: WorldCupTeam
+let Ghana: WorldCupTeam
+let Iran: WorldCupTeam
+let Japan: WorldCupTeam
+let Mexico: WorldCupTeam
+let Morocco: WorldCupTeam
+let Netherlands: WorldCupTeam
+let Poland: WorldCupTeam
+let Portugal: WorldCupTeam
+let Qatar: WorldCupTeam
+let SaudiArabia: WorldCupTeam
+let Senegal: WorldCupTeam
+let Serbia: WorldCupTeam
+let SouthKorea: WorldCupTeam
+let Spain: WorldCupTeam
+let Switzerland: WorldCupTeam
+let Tunisia: WorldCupTeam
+let Uruguay: WorldCupTeam
+let USA: WorldCupTeam
+let Wales: WorldCupTeam
+ 
+let teams: [worldCupTeam] = [Argentina, Australia, Belgium, Brazil, Cameroon, Canada, CostaRica, Croatia, Denmark, Ecuador, England, France, Germany, Ghana, Iran, Japan, Mexico, Morocco, Netherlands, Poland, Portugal, Qatar, SaudiArabia, Senegal, Serbia, SouthKorea, Spain, Switzerland, Tunisia, Uruguay, USA, Wales]
+
 
 /*
  ES 7.- Crear una clase para representar los partidos entre selecciones, deberá contener atributos como equipo local, visitante y resultado como mínimo. Generar una lista aleatoria de partidos entre la lista de selecciones anteriores y hacer un print de este estilo por partido:
@@ -169,6 +205,8 @@ class worldCupGame {
     }
 }
 
-let teams: Set = ["Argentina", "Australia", "Belgium", "Brazil", "Cameroon", "Canada", "Costa Rica", "Croatia", "Denmark", "Ecuador", "England", "France", "Germany", "Ghana", "Iran", "Japan", "Mexico", "Morocco", "Netherlands", "Poland", "Portugal", "Qatar", "Saudi Arabia", "Senegal", "Serbia", "South Korea", "Spain", "Switzerland", "Tunisia", "Uruguay", "USA", "Wales"]
+
 let Groups: Set = ["GroupA", "GroupB", "GroupC", "GroupD", "GroupE", "GroupF", "GroupG", "GroupH"]
 print("Groups are: \(Groups)")
+
+// 32 teams, 16 matches
