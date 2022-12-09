@@ -193,6 +193,43 @@ let teams: [WorldCupTeam] = [Argentina, Australia, Belgium, Brazil, Cameroon, Ca
  EN 7.- Create a class to represent the matches between teams, it must contain attributes such as home team, away team and result as a minimum. Generate a random list of matches from the list of previous teams and make a print of this style per match: Match: Spain 3 - 1 Brazil
  */
 
+protocol SoccerDelegate: AnyObject {
+    func matchDidStart (_ homeTeam: String, vs awayTeam: String)
+    func matchDidEnd (_ winner: String)
+}
+
+class SoccerMatch {
+    weak var delegate: SoccerDelegate?
+    
+    func startMatch() {
+        let homeTeam = "Espana"
+        let awayTeam = "Portugal"
+        
+        delegate?.matchDidStart(homeTeam, vs: awayTeam)
+        guard let winner = [homeTeam, awayTeam].randomElement() else { return }
+        delegate?.matchDidEnd(winner)
+    }
+}
+
+class SoccerScore: SoccerDelegate {
+    
+    func matchDidStart (_ homeTeam: String, vs awayTeam: String) {
+        print ("Soccer Match \(homeTeam) vs. \(awayTeam)")
+    }
+    
+    func matchDidEnd(_ winner: String) {
+        //print ("Soccer Score \(homeTeam) vs. \(awayTeam)")
+        print("Winner: \(winner)")
+    }
+    
+}
+
+let soccerMatch1 = SoccerMatch()
+let soccerScore1 = SoccerScore()
+
+soccerMatch1.delegate = soccerScore1
+soccerMatch1.startMatch()
+
 class WorldCupMatch {
     var matchID: Int = 0
     var datePlayed: String = ""
