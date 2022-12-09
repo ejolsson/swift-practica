@@ -203,11 +203,24 @@ class SoccerMatch {
     
     func startMatch() {
         let homeTeam = "Espana"
+        let homeTeamScore = Int.random(in: 0...3)
         let awayTeam = "Portugal"
+        let awayTeamScore = Int.random(in: 0...3)
+        var winner: String = ""
         
         delegate?.matchDidStart(homeTeam, vs: awayTeam)
-        guard let winner = [homeTeam, awayTeam].randomElement() else { return }
+        if homeTeamScore > awayTeamScore {
+            winner = homeTeam
+        } else if homeTeamScore < awayTeamScore {
+            winner = awayTeam
+        } else {
+            winner = "Tie game"
+        }
+        
+        //guard let winner = [homeTeam, awayTeam].randomElement() else { return }
+        winner
         delegate?.matchDidEnd(winner)
+        print("\(homeTeam) \(homeTeamScore) - \(awayTeam) \(awayTeamScore)")
     }
 }
 
