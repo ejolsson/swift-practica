@@ -194,6 +194,19 @@ let teams: [WorldCupTeam] = [Argentina, Australia, Belgium, Brazil, Cameroon, Ca
  ES 7.- Crear una clase para representar los partidos entre selecciones, deberá contener atributos como equipo local, visitante y resultado como mínimo. Generar una lista aleatoria de partidos entre la lista de selecciones anteriores y hacer un print de este estilo por partido:
  Partido: España 3 - 1 Brasil
  EN 7.- Create a class to represent the matches between teams, it must contain attributes such as home team, away team and result as a minimum. Generate a random list of matches from the list of previous teams and make a print of this style per match: Match: Spain 3 - 1 Brazil
+ 
+  desired output:
+  
+  random matches, 32 teams, 16 matches
+  teams = [0, 1, 2, 3...31]
+  numberOfMatches = 16
+  numberOfParings = 16/2 = 8
+  paring1 = [31,12]
+  paring2 = [14,32]
+  paring32 = [4,29
+  [[31,12],[14,2], ..., [4,29]]
+  [USA vs. Mexico, Spain vs. Portugal,
+ 
  */
 
 protocol SoccerDelegate: AnyObject {
@@ -222,7 +235,7 @@ class SoccerMatch {
         }
         
         //guard let winner = [homeTeam, awayTeam].randomElement() else { return }
-        winner
+        winner // view for debugging
         delegate?.matchDidEnd(winner)
         print("\(homeTeam) \(homeTeamScore) - \(awayTeam) \(awayTeamScore)")
     }
@@ -242,6 +255,7 @@ class SoccerScore: SoccerDelegate {
     
 }
 
+// Execute
 let soccerMatch1 = SoccerMatch()
 let soccerScore1 = SoccerScore()
 
@@ -273,15 +287,14 @@ class WorldCupMatch {
     }
 }
 
-// random matches, 32 teams, 16 matches
 
 func randomMatches(numberOfMatches: Int) {
     
     print("Number of matches: \(numberOfMatches)\n\n")
     var match1 = Int.random(in: 1...numberOfMatches)
     var matches: [String]
-    teamNames
-    teamNames.shuffle()
+    teamNames // call for debug purposes
+    teamNames.shuffle() // https://developer.apple.com/documentation/swift/array/shuffle()
     for _ in 1...numberOfMatches {
         var soccerMatch = SoccerMatch()
         var soccerScore = SoccerScore()
@@ -300,39 +313,11 @@ let luckOfTheDraw: () = randomMatches(numberOfMatches: 16)
 func randomMatch (team1: Int, team2: Int) {
     
 }
-/* desired output:
- 
- teams = [0, 1, 2, 3...31]
- numberOfMatches = 16
- numberOfParings = 16/2 = 8
- paring1 = [31,12]
- paring2 = [14,32]
- paring32 = [4,29
- [[31,12],[14,2], ..., [4,29]]
- [USA vs. Mexico, Spain vs. Portugal,
 
- */
-
-// let matchHomeTeam: WorldCupGame = WorldCupGame.init(matchID: <#T##Int#>, datePlayed: <#T##String#>, round: <#T##String#>, location: <#T##String#>, homeTeam: <#T##String#>, awayTeam: <#T##String#>, homeTeamScore: <#T##Int?#>, awayTeamScore: <#T##Int?#>)
-
+// Testing section
 print("\(Argentina.teamID)")
-      
 teams.randomElement()
 
-
-
-//teams.forEach { WorldCupTeam in
-//    print("Hi")
-//    print(WorldCupTeam)
-//}
-
-//func draw() {
-//    var series = Array(1...32)
-//
-//    teams.forEach { team in
-//        self.initialDraw = 2 // series.randomElement() ?? <#default value#>
-//    }
-//}
 
 func drawPlacement() {
     var series = [teamNames]
