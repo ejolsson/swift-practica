@@ -131,7 +131,10 @@ class WorldCupTeamRoster {
 
 /*
  ES 6.- Crear las clases necesarias, con los atributos mínimos, para representar las selecciones de fútbol del Mundial de fútbol 2022, por ejemplo: Una clase que represente el Mundial, necesitaremos que contenga un listado de Selecciones, cada selección tendrá sus atributos, como nombre, país, jugadores, seleccionador, etc.
- EN 6.- Create the necessary classes, with the minimum attributes, to represent the soccer teams of the 2022 World Cup, for example: A class that represents the World Cup, we will need it to contain a list of Teams, each team will have its attributes, such as name, country, players, coach, etc.
+ EN 6.- Create the necessary classes, with the minimum attributes, to represent the soccer teams of the 2022 World Cup,
+    for example: A class that represents the World Cup, we will need it to contain a
+        list of Teams, each team will have its
+        attributes, such as name, country, players, coach, etc.
 */
 
 class WorldCupTeam {
@@ -194,7 +197,8 @@ let teams: [WorldCupTeam] = [Argentina, Australia, Belgium, Brazil, Cameroon, Ca
 /*
  ES 7.- Crear una clase para representar los partidos entre selecciones, deberá contener atributos como equipo local, visitante y resultado como mínimo. Generar una lista aleatoria de partidos entre la lista de selecciones anteriores y hacer un print de este estilo por partido:
  Partido: España 3 - 1 Brasil
- EN 7.- Create a class to represent the matches between teams, it must contain attributes such as home team, away team and result as a minimum. Generate a random list of matches from the list of previous teams and make a print of this style per match: Match: Spain 3 - 1 Brazil
+ EN 7.- Create a class to represent the matches between teams, it must contain attributes such as home team, away team and result as a minimum.
+ Generate a random list of matches from the list of previous teams and make a print of this style per match: Match: Spain 3 - 1 Brazil
  
   Desired/sample output:
   
@@ -216,7 +220,7 @@ protocol SoccerDelegate: AnyObject {
 }
 
 // func startMatch, random gen scores, delg matchDidStart/End
-class SoccerMatch {
+class SoccerMatch { // match between teams
     weak var delegate: SoccerDelegate?
     
     func startMatch() {
@@ -361,16 +365,16 @@ extension Array {
 }
 
 //let teams: [String] = ["apple", "orange", "banana", "strawberry"]
-let teamesDivided = teamNames.chunked(into: 8)
+let teamesDivided = teamNames.chunked(into: 4)
 teamesDivided[0]
 teamesDivided[1]
 teamesDivided[2]
 teamesDivided[3]
-teamesDivided[4]
 
 
 class Group {
-    var groupName: String
+    var groupName: String = ""
+    var groupTeams: [String] = []
     
     init(groupName: String) {
         self.groupName = groupName
@@ -399,10 +403,11 @@ if Teams winner -> add 3 pts
  
  */
 
-func awardMatchPoints () {
-    var team1 =
-    if team
-}
+//func awardMatchPoints () {
+//    var team1 =
+//    if team
+//}
+
 // MARK: - #10
 
 /*
