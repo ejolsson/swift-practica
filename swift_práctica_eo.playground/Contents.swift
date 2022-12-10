@@ -72,7 +72,7 @@ players.forEach { player in // loop through each player
     }
 }
 
-print("\n\nPlayers with 3 vowels include: \(playersWithThreeVowels)")
+print("\n\nPlayers with 3 vowels include: \(playersWithThreeVowels)\n\n")
 
 
 // MARK: - #4
@@ -185,6 +185,7 @@ let Wales: WorldCupTeam       = WorldCupTeam(teamID: 32, teamName: "Wales")
 var team1: String = USA.teamName
 var teamNames: [String] = [Argentina.teamName, Australia.teamName, Belgium.teamName, Brazil.teamName, Cameroon.teamName, Canada.teamName, CostaRica.teamName, Croatia.teamName, Denmark.teamName, Ecuador.teamName, England.teamName, France.teamName, Germany.teamName, Ghana.teamName, Iran.teamName, Japan.teamName, Mexico.teamName, Morocco.teamName, Netherlands.teamName, Poland.teamName, Portugal.teamName, Qatar.teamName, SaudiArabia.teamName, Senegal.teamName, Serbia.teamName, SouthKorea.teamName, Spain.teamName, Switzerland.teamName, Tunisia.teamName, Uruguay.teamName, USA.teamName, Wales.teamName]
 
+// TODO: not sure how to use this list
 let teams: [WorldCupTeam] = [Argentina, Australia, Belgium, Brazil, Cameroon, Canada, CostaRica, Croatia, Denmark, Ecuador, England, France, Germany, Ghana, Iran, Japan, Mexico, Morocco, Netherlands, Poland, Portugal, Qatar, SaudiArabia, Senegal, Serbia, SouthKorea, Spain, Switzerland, Tunisia, Uruguay, USA, Wales]
 
 // MARK: - #7
@@ -205,9 +206,9 @@ class SoccerMatch {
     weak var delegate: SoccerDelegate?
     
     func startMatch() {
-        let homeTeam = "Espana"
+        guard let homeTeam = teamNames.randomElement() else {return} //"Espana"
         let homeTeamScore = Int.random(in: 0...3)
-        let awayTeam = "Portugal"
+        guard let awayTeam = teamNames.randomElement() else {return} //"Portugal"
         let awayTeamScore = Int.random(in: 0...3)
         var winner: String = ""
         
@@ -246,7 +247,9 @@ let soccerScore1 = SoccerScore()
 
 soccerMatch1.delegate = soccerScore1
 soccerMatch1.startMatch()
+print("\n\n")
 
+// consider removing this class as SoccerMatch will replace
 class WorldCupMatch {
     var matchID: Int = 0
     var datePlayed: String = ""
@@ -274,14 +277,25 @@ class WorldCupMatch {
 
 func randomMatches(numberOfMatches: Int) {
     
-    print("Number of matches: \(numberOfMatches)")
+    print("Number of matches: \(numberOfMatches)\n\n")
     var match1 = Int.random(in: 1...numberOfMatches)
     var matches: [String]
-    print("match1: \(match1)")
-    teams
+    teamNames
+    teamNames.shuffle()
+    for _ in 1...numberOfMatches {
+        var soccerMatch = SoccerMatch()
+        var soccerScore = SoccerScore()
+        soccerMatch.delegate = soccerScore
+        soccerMatch.startMatch()
+        print("\n")
+    }
+//    print("match1: \(match1)")
+//    teams
 }
 
 randomMatches(numberOfMatches: 16)
+
+let luckOfTheDraw: () = randomMatches(numberOfMatches: 16)
 
 func randomMatch (team1: Int, team2: Int) {
     
