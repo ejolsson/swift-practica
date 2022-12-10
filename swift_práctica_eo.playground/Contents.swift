@@ -182,6 +182,8 @@ let USA: WorldCupTeam         = WorldCupTeam(teamID: 31, teamName: "USA")
 let Wales: WorldCupTeam       = WorldCupTeam(teamID: 32, teamName: "Wales")
  
 //USA.initialDraw = 2
+var team1: String = USA.teamName
+var teamNames: [String] = [Argentina.teamName, Australia.teamName, Belgium.teamName, Brazil.teamName, Cameroon.teamName, Canada.teamName, CostaRica.teamName, Croatia.teamName, Denmark.teamName, Ecuador.teamName, England.teamName, France.teamName, Germany.teamName, Ghana.teamName, Iran.teamName, Japan.teamName, Mexico.teamName, Morocco.teamName, Netherlands.teamName, Poland.teamName, Portugal.teamName, Qatar.teamName, SaudiArabia.teamName, Senegal.teamName, Serbia.teamName, SouthKorea.teamName, Spain.teamName, Switzerland.teamName, Tunisia.teamName, Uruguay.teamName, USA.teamName, Wales.teamName]
 
 let teams: [WorldCupTeam] = [Argentina, Australia, Belgium, Brazil, Cameroon, Canada, CostaRica, Croatia, Denmark, Ecuador, England, France, Germany, Ghana, Iran, Japan, Mexico, Morocco, Netherlands, Poland, Portugal, Qatar, SaudiArabia, Senegal, Serbia, SouthKorea, Spain, Switzerland, Tunisia, Uruguay, USA, Wales]
 
@@ -198,6 +200,7 @@ protocol SoccerDelegate: AnyObject {
     func matchDidEnd (_ winner: String)
 }
 
+// func startMatch, random gen scores, delg matchDidStart/End
 class SoccerMatch {
     weak var delegate: SoccerDelegate?
     
@@ -224,6 +227,7 @@ class SoccerMatch {
     }
 }
 
+// funcs matchDidStart, matchDidEnd -> prints scoreboard & winner
 class SoccerScore: SoccerDelegate {
     
     func matchDidStart (_ homeTeam: String, vs awayTeam: String) {
@@ -266,7 +270,34 @@ class WorldCupMatch {
     }
 }
 
-// 32 teams, 16 matches
+// random matches, 32 teams, 16 matches
+
+func randomMatches(numberOfMatches: Int) {
+    
+    print("Number of matches: \(numberOfMatches)")
+    var match1 = Int.random(in: 1...numberOfMatches)
+    var matches: [String]
+    print("match1: \(match1)")
+    teams
+}
+
+randomMatches(numberOfMatches: 16)
+
+func randomMatch (team1: Int, team2: Int) {
+    
+}
+/* desired output:
+ 
+ teams = [0, 1, 2, 3...31]
+ numberOfMatches = 16
+ numberOfParings = 16/2 = 8
+ paring1 = [31,12]
+ paring2 = [14,32]
+ paring32 = [4,29
+ [[31,12],[14,2], ..., [4,29]]
+ [USA vs. Mexico, Spain vs. Portugal,
+
+ */
 
 // let matchHomeTeam: WorldCupGame = WorldCupGame.init(matchID: <#T##Int#>, datePlayed: <#T##String#>, round: <#T##String#>, location: <#T##String#>, homeTeam: <#T##String#>, awayTeam: <#T##String#>, homeTeamScore: <#T##Int?#>, awayTeamScore: <#T##Int?#>)
 
@@ -274,9 +305,7 @@ print("\(Argentina.teamID)")
       
 teams.randomElement()
 
-//for n 1...32 {
-//
-//}
+
 
 //teams.forEach { WorldCupTeam in
 //    print("Hi")
@@ -286,22 +315,20 @@ teams.randomElement()
 //func draw() {
 //    var series = Array(1...32)
 //
-//
 //    teams.forEach { team in
 //        self.initialDraw = 2 // series.randomElement() ?? <#default value#>
 //    }
 //}
-//
-//func drawPlacement() {
-//    var series = [teams]
-//    var firstTeam = series.randomElement()
-//    series.removeAll { $0 == firstTeam }
-//    var secondTeam = series.randomElement()
-//
-////    for n 1...32 {
-////        let match
-////    }
-//}
+
+func drawPlacement() {
+    var series = [teamNames]
+    var firstTeam = series.randomElement()
+    series.removeAll { $0 == firstTeam }
+    var secondTeam = series.randomElement()
+}
+
+drawPlacement()
+
 
 
 // MARK: - #8
