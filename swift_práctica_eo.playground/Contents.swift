@@ -5,6 +5,7 @@ import UIKit
  Práctica iOS Swift
  XV Bootcamp Mobile
  11 Dic 2022
+ gitHub link: https://github.com/ejolsson/swift-practica.git
 */
 
 // MARK: - #1 100 PRIMEROS
@@ -195,7 +196,7 @@ let teams: [WorldCupTeam] = [Argentina, Australia, Belgium, Brazil, Cameroon, Ca
  Partido: España 3 - 1 Brasil
  EN 7.- Create a class to represent the matches between teams, it must contain attributes such as home team, away team and result as a minimum. Generate a random list of matches from the list of previous teams and make a print of this style per match: Match: Spain 3 - 1 Brazil
  
-  desired output:
+  Desired/sample output:
   
   random matches, 32 teams, 16 matches
   teams = [0, 1, 2, 3...31]
@@ -318,7 +319,7 @@ func randomMatch (team1: Int, team2: Int) {
 print("\(Argentina.teamID)")
 teams.randomElement()
 
-
+//not in use
 func drawPlacement() {
     var series = [teamNames]
     var firstTeam = series.randomElement()
@@ -335,6 +336,10 @@ drawPlacement()
 /*
  ES 8.- Generar de forma aleatoria, dentro de la clase Mundial, un listado de grupos con un máximo de 4 selecciones por grupo, se puede crear una clase nueva Grupo que contenga el nombre del grupo, listado de participantes y listado de partidos. Por ejemplo: Grupo A España, Brasil, Francia, Alemania.
  EN 8.- Generate randomly, within the World class, a list of groups with a maximum of 4 teams per group, you can create a new Group class that contains the name of the group, list of participants and list of matches. For example: Group A Spain, Brazil, France, Germany.
+ 
+ Desired/sample output:
+ Group A Spain, Brazil, France, Germany
+ CreateGroup
  */
 
 let Groups: Set = ["GroupA", "GroupB", "GroupC", "GroupD", "GroupE", "GroupF", "GroupG", "GroupH"]
@@ -345,20 +350,65 @@ let x = Groups.randomElement()
 // guard let winner = teams.randomE1ement() else { return }
 // callback(winner)
 
+// How to split an array into chunks. extension Array credit: https://www.hackingwithswift.com/example-code/language/how-to-split-an-array-into-chunks
+
+extension Array {
+    func chunked(into size: Int) -> [[Element]] {
+        return stride(from: 0, to: count, by: size).map {
+            Array(self[$0 ..< Swift.min($0 + size, count)])
+        }
+    }
+}
+
+//let teams: [String] = ["apple", "orange", "banana", "strawberry"]
+let teamesDivided = teamNames.chunked(into: 8)
+teamesDivided[0]
+teamesDivided[1]
+teamesDivided[2]
+teamesDivided[3]
+teamesDivided[4]
+
+
+class Group {
+    var groupName: String
+    
+    init(groupName: String) {
+        self.groupName = groupName
+    }
+    
+    func printGroupName(groupName: String) {
+        print("Group Name is Group \(groupName)")
+    }
+}
+
+let groupA = Group(groupName: "A")
 
 
 // MARK: - #9
 
 /*
  ES 9.- Para añadir a cada Grupo los puntos de cada selección habrá que contabilizar las victorias con 3 puntos, empates con 1 y derrotas con 0. Añadir una función en la clase Grupo que le pasemos una selección y nos devuelva sus puntos.
- EN 9.- To add the points of each team to each Group, it will be necessary to count the victories with 3 points, draws with 1 and losses with 0. Add a function in the Group class that we pass on a selection and it returns its points.
+ EN 9.- To add the points of each team to each Group, it will be necessary to
+ count the victories with 3 points, draws with 1 and losses with 0.
+ Add a function in the Group class that we pass on a selection and it returns its points.
 
+if Teams winner -> add 3 pts
+ tie -> add 1 pt
+ 
+ Output:
+ 
  */
 
+func awardMatchPoints () {
+    var team1 =
+    if team
+}
 // MARK: - #10
 
 /*
  ES 10.- Generar los partidos del Mundial en cada grupo y calcular las dos primeras selecciones de cada grupo y hacer un print con los clasificados.
- EN 10.- Generate the World Cup matches in each group and calculate the first two teams in each group and make a print with the qualifiers.
+ EN 10.- Generate the World Cup matches in each group and
+ calculate the first two teams in each group and
+ make a print with the qualifiers.
  
  */
