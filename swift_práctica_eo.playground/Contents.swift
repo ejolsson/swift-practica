@@ -250,8 +250,7 @@ class WorldCupTeam {
  ES 7.- Crear una clase para representar los partidos entre selecciones, deberá contener atributos como equipo local, visitante y resultado como mínimo. Generar una lista aleatoria de partidos entre la lista de selecciones anteriores y hacer un print de este estilo por partido:
  Partido: España 3 - 1 Brasil
  EN 7.- Create a class to represent the matches between teams, it must contain attributes such as home team, away team and result as a minimum. Generate a random list of matches from the list of previous teams and make a print of this style per match: Match: Spain 3 - 1 Brazil
- */
-/*
+
  ES 8.- Generar de forma aleatoria, dentro de la clase Mundial, un listado de grupos con un máximo de 4 selecciones por grupo, se puede crear una clase nueva Grupo que contenga el nombre del grupo, listado de participantes y listado de partidos. Por ejemplo: Grupo A España, Brasil, Francia, Alemania.
  EN 8.- Generate randomly, within the World class, a list of groups with a maximum of 4 teams per group, you can create a new Group class that contains the name of the group, list of participants and list of matches. For example: Group A Spain, Brazil, France, Germany.
  */
@@ -311,11 +310,10 @@ class Group {
     }
     
     func roundRobinWithinGroup () {
-        print("\nStarting Round Robin")
-        print("\(self.groupName): \(self.groupTeams!)")
-        delegate?.randomMatches(teamsToRandomize: self.groupTeams ?? ["Brazil", "Germany", "Netherlands", "England"], numberOfMatches: 3)
-        //self.delegate
-        // delegate not working, add function below
+        print("\nStarting Round Robin for \(self.groupName): \(self.groupTeams!)")
+
+        delegate?.randomMatches(teamsToRandomize: self.groupTeams ?? ["Brazil", "Germany", "Netherlands", "England"], numberOfMatches: 6)
+
         print("End Round Robin: \(self.groupName)")
     }
     
@@ -359,21 +357,14 @@ class Group {
         }
         playInnerGroupMatch(homeTeam: homeTeam ?? "USA", awayTeam: awayTeam ?? "Mexico")
     }
-
-    /*
-     EN 9.- To add the points of each team to each Group, it will be necessary to
-     count the victories with 3 points, draws with 1 and losses with 0.
-     Add a function in the Group class that we pass on a selection and it returns its points.
-
-    if Teams winner -> add 3 pts
-     tie -> add 1 pt
-     
-     Output:
-     
-     */
     
     func awardPoints() {
-        
+        // TODO: award and record points
+        /*
+         EN 9.- To add the points of each team to each Group, it will be necessary to
+         count the victories with 3 points, draws with 1 and losses with 0.
+         Add a function in the Group class that we pass on a selection and it returns its points.
+         */
     }
 }
 
@@ -389,31 +380,19 @@ class World: RoundRobin {
         //print("test")
         print("Random Matches: \(numberOfMatches)")
         var shuffledMatches: [String] = teamsToRandomize.shuffled() // https://developer.apple.com/documentation/swift/array/shuffle()
-        teamsToRandomize // call for debug purposes
-        shuffledMatches // call for debug purposes
+
         for n in 1...numberOfMatches {
             var homeTeam = shuffledMatches.randomElement()
             var awayTeam = shuffledMatches.randomElement()
-            //var matchX = Match(homeTeam: teamNames.randomElement() ?? "Spain", awayTeam: teamNames.randomElement() ?? "Portugal")
-            print("\nRandom match #\(n)") // for debugging
-            //print("Before delegate?.playMatch OR playRandom call")
-            //print("Home team: \(homeTeam!)")
-            //print("Away team: \(awayTeam!)")
                         
             // TODO: Replace func below (used b/c delegate not working...)
             // also see class Group > func innerGroupMatch > func playInnerGroupMatch
             // this fuction used in production
             func playRandom (homeTeam: String, awayTeam: String) -> (String, String, Int, Int, String, Int, Int) {
-                print("Home team: \(homeTeam)")
                 let homeTeamScore = Int.random(in: 0...3)
-                print("Home team score: \(homeTeamScore)")
                 var homeTeamAwardPoints: Int = 0
-                
-                print("Away team: \(awayTeam)")
                 let awayTeamScore = Int.random(in: 0...3)
-                print("Away team score: \(awayTeamScore)")
                 var awayTeamAwardPoints: Int = 0
-                
                 var winner: String = ""
                 let winnerAwardPoints: Int = 3
                 let drawAwardPoints: Int = 1
@@ -431,7 +410,7 @@ class World: RoundRobin {
                     homeTeamAwardPoints = drawAwardPoints
                 }
                 
-                print("\(homeTeam) \(homeTeamScore) - \(awayTeam) \(awayTeamScore)")
+                print("Random match #\(n): \(homeTeam) \(homeTeamScore) - \(awayTeam) \(awayTeamScore)")
                 
                 return (winner, homeTeam, homeTeamScore, homeTeamAwardPoints, awayTeam, awayTeamScore, awayTeamAwardPoints)
             }
@@ -439,7 +418,6 @@ class World: RoundRobin {
             //delegate?.playMatch (homeTeam: homeTeam ?? "USA", awayTeam: awayTeam ?? "Mexico")
 
         }
-    print("\nEnd random matches\n\n")
     }
     
     func divideTeams (teamsToDivide: [String]) -> [[String]] {
@@ -562,7 +540,7 @@ let groupClasses: [AnyObject] = [groupA, groupB, groupC, groupD, groupE, groupF,
 
 // Create WorldCup, divide teams into groups
 let world2022: World = World(year: 2022)
-groupA.delegate = world2022 // this instance of Group needs to execute a delegated function
+groupA.delegate = world2022 // this instance of Group needs to exe a delegated func
 groupB.delegate = world2022
 groupC.delegate = world2022
 groupD.delegate = world2022
@@ -579,26 +557,23 @@ groupH.delegate = world2022
 //world2022.delegate = groupG
 //world2022.delegate = groupH
 
-
-groupA.groupName
-groupA.groupTeams
-
 print("\n\n7° Generate a random list of matches from the list of previous teams and make a print of this style per match: Match: Spain 3 - 1 Brazil\n")
 
 world2022.randomMatches(teamsToRandomize: teamNames, numberOfMatches: 8)
 
-//let groupAMatches = Group()
 teamNames // for debugging purposes
 
 let drawBuckets: [[String]] = world2022.divideTeams(teamsToDivide: teamNames) // note reshuffle
 
 print("\n\n8° Generate randomly, within the World class, a list of groups with a maximum of 4 teams per group. For example: Group A Spain, Brazil, France, Germany. \n")
+
 groupClasses[1] // for debugging
 
 // TODO: loop group bucket assignments
 groupClasses.forEach { Group in
     //print("\(Group.)")
 }
+
 groupA.groupTeams = drawBuckets[0]
 print("Group A teams: \(groupA.groupTeams!)")
 groupB.groupTeams = drawBuckets[1]
@@ -620,23 +595,16 @@ teamNames
 groupA.groupTeams
 groupA.innerGroupMatch()
 
-
-let match1 = Match(homeTeam: "usa", awayTeam: "spain")
-match1.playMatch(homeTeam: "usa", awayTeam: "Spain")
-match1.winner // for debugging
-match1.homeTeam // for debugging
-match1.awayTeam // for debugging
-
 print("\n\n9° To add the points of each team to each Group, victories = 3 pts, draws = 1pt, losses = 0. Add a function in the Group class that we pass on a selection and it returns its points. \n")
 
-groupA.innerGroupMatch()
-
-usa.teamPoints
-
-
 groupA.roundRobinWithinGroup()
-groupA
-usa.teamPoints
+groupB.roundRobinWithinGroup()
+groupC.roundRobinWithinGroup()
+groupD.roundRobinWithinGroup()
+groupE.roundRobinWithinGroup()
+groupF.roundRobinWithinGroup()
+groupG.roundRobinWithinGroup()
+groupH.roundRobinWithinGroup()
 
 argentina.teamPoints
 australia.teamPoints
