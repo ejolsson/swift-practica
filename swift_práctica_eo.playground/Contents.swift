@@ -18,15 +18,115 @@ import UIKit
  2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 103, 107, 109, 113, 127, 131, 137, 139, 149, 151, 157, 163, 167, 173, 179, 181, 191, 193, 197, 199, 211, 223, 227, 229, 233, 239, 241, 251, 257, 263, 269, 271, 277, 281, 283, 293, 307, 311, 313, 317, 331, 337, 347, 349, 353, 359, 367, 373, 379, 383, 389, 397, 401, 409, 419, 421, 431, 433, 439, 443, 449, 457, 461, 463, 467, 479, 487, 491, 499, 503, 509, 521, 523, 541
 */
 
+var primeList: [Int] = []
+
+func calcPrimes (target: Int) {
+    
+    for num in 4...target {
+        var den = num
+        var nonZeroRemainderCount: Int = 0
+        
+        for den in 2..<num {
+//            print("\nRun number: \(num).\(den)")
+//            print("num = \(num)")
+//            print("den = \(den)")
+//            print("Testing: \(num)/\(den)")
+            var quotient: Float = Float(num)/Float(den)
+//            print("Quoient = \(quotient)")
+//            print("remainder = \(num%den)")
+//            print("nonZeroRemainderCount: \(nonZeroRemainderCount)")
+            
+            if num % den == 0 {
+                //print("Remainder is zero, not prime)")
+                // add num to "notPrime" list
+            } else if num % den != 0 {
+                //print("remainder is NOT zero, possible prime")
+                nonZeroRemainderCount = nonZeroRemainderCount + 1
+                //print("nonZeroRemainderCount: \(nonZeroRemainderCount)")
+            } else {
+                print("something else")
+            }
+                
+            if nonZeroRemainderCount == num-2 {
+                print("\(num) is a prime number!")
+                primeList.append(num)
+                print("primeList = \(primeList)")
+                print("primeList.count = \(primeList.count)\n")
+            }
+        }
+    }
+
+}
+
+calcPrimes(target: 20) // NOT PERFORMANT! :(, do not recommend using large numbers. Not able to reach 100 primes
+// found more performant solution in section below
+primeList
+primeList.count
 
 // MARK: - #2
 
 /*
  ES 2.- Calcular la suma de los primeros 50 números primos y hacer un print del resultado.
  EN 2.- Calculate the sum of the first 50 prime numbers and print the result.
- Answer: 5117
+ Expected answer: 5117
  First 50 primes: 2 + 3 + 5 + 7 + 11 + 13 + 17 + 19 + 23 + 29 + 31 + 37 + 41 + 43 + 47 + 53 + 59 + 61 + 67 + 71 + 73 + 79 + 83 + 89 + 97 + 101 + 103 + 107 + 109 + 113 + 127 + 131 + 137 + 139 + 149 + 151 + 157 + 163 + 167 + 173 + 179 + 181 + 191 + 193 + 197 + 199 + 211 + 223 + 227 + 229
  */
+
+func primes(upTo rangeEndNumber: Int) -> [Int] {
+    let firstPrime = 2
+    guard rangeEndNumber >= firstPrime else {
+        fatalError("End of range has to be greater than or equal to \(firstPrime)!")
+    }
+    var numbers = Array(firstPrime...rangeEndNumber)
+    var currentPrimeIndex = 0
+    var primeCount: Int = 0
+
+    while currentPrimeIndex < numbers.count { // logic credit: https://stackoverflow.com/questions/55385273/prime-numbers-print-from-range-2-100
+        let currentPrime = numbers[currentPrimeIndex]
+        var numbersAfterPrime = numbers.suffix(from: currentPrimeIndex + 1)
+        
+        numbersAfterPrime.removeAll(where: { $0 % currentPrime == 0 })
+        numbers = numbers.prefix(currentPrimeIndex + 1) + Array(numbersAfterPrime)
+
+        currentPrimeIndex += 1
+        primeCount += 1
+        numbers.count
+    }
+    return numbers
+}
+
+func printLastTenPrimes (rangeOfLast: Int, lastPrimeIndex: Int) {
+    let firstOfRange: Int = lastPrimeIndex - rangeOfLast
+    for n in firstOfRange..<lastPrimeIndex {
+        print("\(bigPrimelist[n])")
+    }
+}
+
+var bigPrimelist = primes(upTo: 542) // use 230 to get first 50 primes
+bigPrimelist.count
+
+print("\n\n1° Calculate and generate a list with the first 100 prime numbers and print the last 10. \n")
+
+let primeCount: Int = bigPrimelist.count
+print("First 100 primes: \(bigPrimelist)")
+printLastTenPrimes(rangeOfLast: 10, lastPrimeIndex: primeCount)
+
+// #2
+
+var smallPrimeList = primes(upTo: 230)
+smallPrimeList
+smallPrimeList.count
+
+func sumFirstPrimes (target: Int) {
+    var sum: Int = 0
+    for i in 1...target {
+        sum = sum + smallPrimeList[i-1]
+    }
+    print("Sum of fist 50 prime numbers = \(sum)")
+}
+
+print("\n\n2° Calculate the sum of the first 50 prime numbers and print the result. \n")
+sumFirstPrimes(target: 50)
 
 
 // MARK: - #3
@@ -34,7 +134,6 @@ import UIKit
 /*
  ES 3.- Dada la siguiente lista, obtener todos los elementos que contengan más de dos vocales:
 val players: [String] = [“Vinicius”, “Messi”, “Ronaldo”, “Pedri”, “Mbappe”, “Modric”, “Militao”, “Morata”, “Valverde”, “Benzema”, “Piqué” ]
-
  EN 3.- Given the following list, obtain all the elements that contain more than two vowels:
 val players: [String] = [“Vinicius”, “Messi”, “Ronaldo”, “Pedri”, “Mbappe”, "Modric", "Militao", "Morata", "Valverde", "Benzema", "Piqué" ]
 
@@ -42,29 +141,21 @@ val players: [String] = [“Vinicius”, “Messi”, “Ronaldo”, “Pedri”
 */
 
 let players: [String] = ["Vinicius", "Messi", "Ronaldo", "Pedri", "Mbappe", "Modric", "Militao", "Morata", "Valverde", "Benzema", "Piqué"]
-
 let vowels: [String] = ["a","e","i","o","u", "á", "é", "í", "ó", "ú"]
-
 var playersWithThreeVowels: [String] = []
-print("\n\nPlayers with 3 vowels include: \(playersWithThreeVowels)")
 
 players.forEach { player in // loop through each player
-   
-    print("\nPlayer evaluated: \(player)")
-    
+    //print("\nPlayer evaluated: \(player)")
     let playerName = String(player)
     var vowelCount: Int = 0
     
     player.forEach { letter in // loop through each letter in player name
-        
-        print("Player = \(player), Character = \(letter)")
-        
+        //print("Player = \(player), Character = \(letter)")
         if letter == "a" || letter == "á" || letter == "e" || letter == "é" || letter == "i" || letter == "í" || letter == "o" || letter == "ó" || letter == "u" || letter == "ú" {
-            print("\(player) has a vowel")
+            //print("\(player) has a vowel")
             vowelCount += 1
-            print("\(player) vowel = \(vowelCount)")
+            //print("\(player) vowel = \(vowelCount)")
         }
-        
         //print("\n\nPlayers with 3 vowels include: \(playersWithThreeVowels)")
     }
     
@@ -73,7 +164,8 @@ players.forEach { player in // loop through each player
     }
 }
 
-print("\n\nPlayers with 3 vowels include: \(playersWithThreeVowels)\n\n")
+print("\n\n3° Given the following list, obtain all the elements that contain more than two vowels")
+print("\nPlayers with 3 vowels include: \(playersWithThreeVowels)\n\n")
 
 
 // MARK: - #4
