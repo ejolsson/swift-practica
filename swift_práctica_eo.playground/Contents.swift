@@ -243,3 +243,367 @@ class WorldCupTeam {
         //self.initialDraw = initialDraw
     }
 }
+
+// MARK: - #7
+
+/*
+ ES 7.- Crear una clase para representar los partidos entre selecciones, deberá contener atributos como equipo local, visitante y resultado como mínimo. Generar una lista aleatoria de partidos entre la lista de selecciones anteriores y hacer un print de este estilo por partido:
+ Partido: España 3 - 1 Brasil
+ EN 7.- Create a class to represent the matches between teams, it must contain attributes such as home team, away team and result as a minimum. Generate a random list of matches from the list of previous teams and make a print of this style per match: Match: Spain 3 - 1 Brazil
+ */
+/*
+ ES 8.- Generar de forma aleatoria, dentro de la clase Mundial, un listado de grupos con un máximo de 4 selecciones por grupo, se puede crear una clase nueva Grupo que contenga el nombre del grupo, listado de participantes y listado de partidos. Por ejemplo: Grupo A España, Brasil, Francia, Alemania.
+ EN 8.- Generate randomly, within the World class, a list of groups with a maximum of 4 teams per group, you can create a new Group class that contains the name of the group, list of participants and list of matches. For example: Group A Spain, Brazil, France, Germany.
+ */
+
+protocol PlayMatchDelegate: AnyObject { // https://docs.swift.org/swift-book/LanguageGuide/Protocols.html
+    // func fm class Match
+    func playMatch (homeTeam: String, awayTeam: String) -> (String, String, Int, String, Int)
+    
+    // func fm class Group
+    
+}
+
+protocol PointKeeper: AnyObject {
+    
+}
+
+// How to split an array into chunks. extension Array credit: https://www.hackingwithswift.com/example-code/language/how-to-split-an-array-into-chunks
+public extension Array { // supports Group divideTeams function
+    func chunked(into size: Int) -> [[Element]] {
+        return stride(from: 0, to: count, by: size).map {
+            Array(self[$0 ..< Swift.min($0 + size, count)])
+        }
+    }
+}
+
+class Team {
+    var teamId: Int = 0
+    var teamName: String = ""
+    public var teamPoints: Int = 0 // for tourney scoring, used for 9°
+    
+    init(teamId: Int = 0, teamName: String) {
+        self.teamId = teamId
+        self.teamName = teamName
+    }
+}
+
+class Group {
+    var groupId: Int = 0
+    var groupName: String = ""
+    var groupTeams: [String]? = []
+    
+    init(groupId: Int, groupName: String) {
+        self.groupName = groupName
+    }
+    
+    func printGroupName(groupName: String) {
+        print("Group Name is Group \(groupName)")
+    }
+    
+    func assignTeamsToGroup () {
+        
+    }
+    
+    func innerGroupMatch () {
+        var homeTeam = groupTeams?.randomElement()
+        var awayTeam = groupTeams?.randomElement()
+        // TODO: Replace func below (used b/c delegate not working...)
+        func playInnerGroupMatch (homeTeam: String, awayTeam: String) -> (String, String, Int, Int, String, Int, Int) {
+            print("Home team: \(homeTeam)")
+            let homeTeamScore = Int.random(in: 0...3)
+            print("Home team score: \(homeTeamScore)")
+            var homeTeamAwardPoints: Int = 0
+            
+            print("Away team: \(awayTeam)")
+            let awayTeamScore = Int.random(in: 0...3)
+            print("Away team score: \(awayTeamScore)")
+            var awayTeamAwardPoints: Int = 0
+            
+            var winner: String = ""
+            let winnerAwardPoints: Int = 3
+            let drawAwardPoints: Int = 1
+            
+            if homeTeamScore > awayTeamScore {
+                winner = homeTeam
+                homeTeamAwardPoints = winnerAwardPoints
+                // delgate out score updater
+            } else if homeTeamScore < awayTeamScore {
+                winner = awayTeam
+                awayTeamAwardPoints = winnerAwardPoints
+            } else {
+                winner = "Tie game"
+                homeTeamAwardPoints = drawAwardPoints
+                homeTeamAwardPoints = drawAwardPoints
+            }
+            
+            print("\(homeTeam) \(homeTeamScore) - \(awayTeam) \(awayTeamScore)")
+            
+            return (winner, homeTeam, homeTeamScore, homeTeamAwardPoints, awayTeam, awayTeamScore, awayTeamAwardPoints)
+        }
+        playInnerGroupMatch(homeTeam: homeTeam ?? "USA", awayTeam: awayTeam ?? "Mexico")
+    }
+
+    /*
+     EN 9.- To add the points of each team to each Group, it will be necessary to
+     count the victories with 3 points, draws with 1 and losses with 0.
+     Add a function in the Group class that we pass on a selection and it returns its points.
+
+    if Teams winner -> add 3 pts
+     tie -> add 1 pt
+     
+     Output:
+     
+     */
+    
+    func awardPoints() {
+        
+    }
+}
+
+class World {
+    var year: Int = 0
+    weak var delegate: PlayMatchDelegate?
+    
+    init(year: Int) {
+        self.year = year
+    }
+    
+    func randomMatches(numberOfMatches: Int) { // #7 item
+        
+        print("Random Matches: \(numberOfMatches)")
+        var shuffledMatches: [String] = teamNames.shuffled() // https://developer.apple.com/documentation/swift/array/shuffle()
+        teamNames // call for debug purposes
+        shuffledMatches // call for debug purposes
+        for n in 1...numberOfMatches {
+            var homeTeam = shuffledMatches.randomElement()
+            var awayTeam = shuffledMatches.randomElement()
+            //var matchX = Match(homeTeam: teamNames.randomElement() ?? "Spain", awayTeam: teamNames.randomElement() ?? "Portugal")
+            print("\nRandom match #\(n)") // for debugging
+            print("Before delegate?.playMatch OR playRandom call")
+            print("Home team: \(homeTeam!)")
+            print("Away team: \(awayTeam!)")
+                        
+            // TODO: Replace func below (used b/c delegate not working...)
+            func playRandom (homeTeam: String, awayTeam: String) -> (String, String, Int, String, Int) {
+                print("Home team: \(homeTeam)")
+                let homeTeamScore = Int.random(in: 0...3)
+                print("Home team score: \(homeTeamScore)")
+                print("Away team: \(awayTeam)")
+                let awayTeamScore = Int.random(in: 0...3)
+                print("Away team score: \(awayTeamScore)")
+                var winner: String = ""
+                
+                if homeTeamScore > awayTeamScore {
+                    winner = homeTeam
+                } else if homeTeamScore < awayTeamScore {
+                    winner = awayTeam
+                } else {
+                    winner = "Tie game"
+                }
+                
+                print("\(homeTeam) \(homeTeamScore) - \(awayTeam) \(awayTeamScore)")
+                
+                return (winner, homeTeam, homeTeamScore, awayTeam, awayTeamScore)
+            }
+            playRandom(homeTeam: homeTeam ?? "USA", awayTeam: awayTeam ?? "Mexico")
+            //delegate?.playMatch (homeTeam: homeTeam ?? "USA", awayTeam: awayTeam ?? "Mexico")
+
+        }
+    print("\nEnd random matches\n\n")
+    }
+    
+    func divideTeams (teamsToDivide: [String]) -> [[String]] {
+        var teamsShuffled = teamsToDivide
+        
+        teamsShuffled.shuffle() // https://developer.apple.com/documentation/swift/array/shuffle()
+        //print("\n\nTeams to divide: \(teamsToDivide)\n") // for debug
+        //print("Shuffled teams: \(teamsShuffled)\n") // for debug
+        
+        let teamsDivided = teamsShuffled.chunked(into: 4)
+        let group1: [String] = teamsDivided[0]
+        
+        print("Group 1 teams: \(group1)\n")
+        let group2: [String] = teamsDivided[1]
+        print("Group 2 teams: \(group2)\n")
+        let group3: [String] = teamsDivided[2]
+        print("Group 3 teams: \(group3)\n")
+        let group4: [String] = teamsDivided[3]
+        print("Group 4 teams: \(group4)\n")
+        let group5: [String] = teamsDivided[4]
+        print("Group 5 teams: \(group5)\n")
+        let group6: [String] = teamsDivided[5]
+        print("Group 6 teams: \(group6)\n")
+        let group7: [String] = teamsDivided[6]
+        print("Group 7 teams: \(group7)\n")
+        let group8: [String] = teamsDivided[7]
+        print("Group 8 teams: \(group8)\n")
+        
+        let divisonBundle: Array = [teamsDivided]
+        return teamsDivided
+    }
+}
+
+class Match: PlayMatchDelegate {
+    var homeTeam: String
+    var awayTeam: String
+    var winner: String = ""
+    
+    init(homeTeam: String, awayTeam: String) {
+        self.homeTeam = homeTeam
+        self.awayTeam = awayTeam
+    }
+    
+    func playMatch (homeTeam: String, awayTeam: String) -> (String, String, Int, String, Int) {
+        print("Hi")
+        print("Home team: \(homeTeam)")
+        let homeTeamScore = Int.random(in: 0...3)
+        print("Home team score: \(homeTeamScore)")
+        print("Away team: \(awayTeam)")
+        let awayTeamScore = Int.random(in: 0...3)
+        print("Away team score: \(awayTeamScore)")
+        var winner: String = ""
+        
+        if homeTeamScore > awayTeamScore {
+            winner = homeTeam
+        } else if homeTeamScore < awayTeamScore {
+            winner = awayTeam
+        } else {
+            winner = "Tie game"
+        }
+        
+        print("\(homeTeam) \(homeTeamScore) - \(awayTeam) \(awayTeamScore)")
+        
+        return (winner, homeTeam, homeTeamScore, awayTeam, awayTeamScore)
+    }
+}
+
+
+
+// MARK: EXECUTION
+
+// Create teams (instantiate Team class)
+let argentina: Team   = Team(teamId: 0, teamName: "Argentina")
+let australia: Team   = Team(teamId: 1, teamName: "Australia")
+let belgium: Team     = Team(teamId: 2, teamName: "Belgium")
+let brazil: Team      = Team(teamId: 3, teamName: "Brazil")
+let cameroon: Team    = Team(teamId: 4, teamName: "Cameroon")
+let canada: Team      = Team(teamId: 5, teamName: "Canada")
+let costaRica: Team   = Team(teamId: 6, teamName: "Costa Rica")
+let croatia: Team     = Team(teamId: 8, teamName: "Croatia")
+let denmark: Team     = Team(teamId: 9, teamName: "Denmark")
+let ecuador: Team     = Team(teamId: 10, teamName: "Ecuador")
+let england: Team     = Team(teamId: 11, teamName: "England")
+let france: Team      = Team(teamId: 12, teamName: "France")
+let germany: Team     = Team(teamId: 13, teamName: "Germany")
+let ghana: Team       = Team(teamId: 14, teamName: "Ghana")
+let iran: Team        = Team(teamId: 15, teamName: "Iran")
+let japan: Team       = Team(teamId: 16, teamName: "Japan")
+let mexico: Team      = Team(teamId: 17, teamName: "Mexico")
+let morocco: Team     = Team(teamId: 18, teamName: "Morocco")
+let netherlands: Team = Team(teamId: 19, teamName: "Netherlands")
+let poland: Team      = Team(teamId: 20, teamName: "Poland")
+let portugal: Team    = Team(teamId: 21, teamName: "Portugal")
+let qatar: Team       = Team(teamId: 22, teamName: "Qatar")
+let saudiArabia: Team = Team(teamId: 23, teamName: "Saudi Arabia")
+let senegal: Team     = Team(teamId: 24, teamName: "Senegal")
+let serbia: Team      = Team(teamId: 25, teamName: "Serbia")
+let southKorea: Team  = Team(teamId: 26, teamName: "South Korea")
+let spain: Team       = Team(teamId: 27, teamName: "Spain")
+let switzerland: Team = Team(teamId: 28, teamName: "Switzerland")
+let tunisia: Team     = Team(teamId: 29, teamName: "Tunisia")
+let uruguay: Team     = Team(teamId: 30, teamName: "Uruguay")
+let usa: Team         = Team(teamId: 31, teamName: "USA")
+let wales: Team       = Team(teamId: 32, teamName: "Wales")
+
+var teamNames: [String] = [argentina.teamName, australia.teamName, belgium.teamName, brazil.teamName, cameroon.teamName, canada.teamName, costaRica.teamName, croatia.teamName, denmark.teamName, ecuador.teamName, england.teamName, france.teamName, germany.teamName, ghana.teamName, iran.teamName, japan.teamName, mexico.teamName, morocco.teamName, netherlands.teamName, poland.teamName, portugal.teamName, qatar.teamName, saudiArabia.teamName, senegal.teamName, serbia.teamName, southKorea.teamName, spain.teamName, switzerland.teamName, tunisia.teamName, uruguay.teamName, usa.teamName, wales.teamName]
+
+// Create groups (instantiate Group class)
+let groupA: Group = Group(groupId: 0, groupName: "Group A")
+let groupB: Group = Group(groupId: 1, groupName: "Group B")
+let groupC: Group = Group(groupId: 2, groupName: "Group C")
+let groupD: Group = Group(groupId: 3, groupName: "Group D")
+let groupE: Group = Group(groupId: 4, groupName: "Group E")
+let groupF: Group = Group(groupId: 5, groupName: "Group F")
+let groupG: Group = Group(groupId: 6, groupName: "Group G")
+let groupH: Group = Group(groupId: 7, groupName: "Group H")
+let groupNames: [String] = [groupA.groupName, groupB.groupName, groupC.groupName, groupD.groupName, groupE.groupName, groupF.groupName, groupG.groupName, groupH.groupName]
+let groupClasses: [AnyObject] = [groupA, groupB, groupC, groupD, groupE, groupF, groupG, groupH]
+
+
+// Create WorldCup, divide teams into groups
+let world2022: World = World(year: 2022)
+groupA.groupName
+groupA.groupTeams
+
+print("\n\n7° Generate a random list of matches from the list of previous teams and make a print of this style per match: Match: Spain 3 - 1 Brazil\n")
+
+world2022.randomMatches(numberOfMatches: 8)
+
+//let groupAMatches = Group()
+teamNames // for debugging purposes
+
+let drawBuckets: [[String]] = world2022.divideTeams(teamsToDivide: teamNames) // note reshuffle
+
+print("\n\n8° Generate randomly, within the World class, a list of groups with a maximum of 4 teams per group. For example: Group A Spain, Brazil, France, Germany. \n")
+groupClasses[1] // for debugging
+groupClasses.forEach { Group in // attempting to loop assignments below
+    print("\(Group)")
+}
+groupA.groupTeams = drawBuckets[0]
+print("Group A teams: \(groupA.groupTeams!)")
+groupB.groupTeams = drawBuckets[1]
+print("Group B teams: \(groupB.groupTeams!)")
+groupC.groupTeams = drawBuckets[2]
+print("Group C teams: \(groupC.groupTeams!)")
+groupD.groupTeams = drawBuckets[3]
+print("Group D teams: \(groupD.groupTeams!)")
+groupE.groupTeams = drawBuckets[4]
+print("Group E teams: \(groupE.groupTeams!)")
+groupF.groupTeams = drawBuckets[5]
+print("Group F teams: \(groupF.groupTeams!)")
+groupG.groupTeams = drawBuckets[6]
+print("Group G teams: \(groupG.groupTeams!)")
+groupH.groupTeams = drawBuckets[7]
+print("Group H teams: \(groupH.groupTeams!)")
+teamNames
+
+let match1 = Match(homeTeam: "usa", awayTeam: "spain")
+match1.playMatch(homeTeam: "usa", awayTeam: "Spain")
+match1.winner // for debugging
+match1.homeTeam // for debugging
+match1.awayTeam // for debugging
+
+print("\n\n9° To add the points of each team to each Group, victories = 3 pts, draws = 1pt, losses = 0. Add a function in the Group class that we pass on a selection and it returns its points. \n")
+
+groupA.innerGroupMatch()
+
+usa.teamPoints
+
+/*
+ ES 9.- Para añadir a cada Grupo los puntos de cada selección habrá que contabilizar las victorias con 3 puntos, empates con 1 y derrotas con 0. Añadir una función en la clase Grupo que le pasemos una selección y nos devuelva sus puntos.
+ EN 9.- To add the points of each team to each Group, it will be necessary to
+ count the victories with 3 points, draws with 1 and losses with 0.
+ Add a function in the Group class that we pass on a selection and it returns its points.
+
+if Teams winner -> add 3 pts
+ tie -> add 1 pt
+ 
+ Output:
+ 
+ */
+
+//func awardMatchPoints () {
+//    var team1 =
+//    if team
+//}
+
+// MARK: - #10
+
+/*
+ ES 10.- Generar los partidos del Mundial en cada grupo y calcular las dos primeras selecciones de cada grupo y hacer un print con los clasificados.
+ EN 10.- Generate the World Cup matches in each group and
+ calculate the first two teams in each group and
+ make a print with the qualifiers.
+ 
+ */
