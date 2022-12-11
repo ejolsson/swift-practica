@@ -152,45 +152,45 @@ class WorldCupTeam {
     }
 }
 
-let Argentina: WorldCupTeam   = WorldCupTeam(teamID: 1, teamName: "Argentina")
-let Australia: WorldCupTeam   = WorldCupTeam(teamID: 2, teamName: "Australia")
-let Belgium: WorldCupTeam     = WorldCupTeam(teamID: 3, teamName: "Belgium")
-let Brazil: WorldCupTeam      = WorldCupTeam(teamID: 4, teamName: "Brazil")
-let Cameroon: WorldCupTeam    = WorldCupTeam(teamID: 5, teamName: "Cameroon")
-let Canada: WorldCupTeam      = WorldCupTeam(teamID: 6, teamName: "Canada")
-let CostaRica: WorldCupTeam   = WorldCupTeam(teamID: 7, teamName: "Costa Rica")
-let Croatia: WorldCupTeam     = WorldCupTeam(teamID: 8, teamName: "Croatia")
-let Denmark: WorldCupTeam     = WorldCupTeam(teamID: 9, teamName: "Denmark")
-let Ecuador: WorldCupTeam     = WorldCupTeam(teamID: 10, teamName: "Ecuador")
-let England: WorldCupTeam     = WorldCupTeam(teamID: 11, teamName: "England")
-let France: WorldCupTeam      = WorldCupTeam(teamID: 12, teamName: "France")
-let Germany: WorldCupTeam     = WorldCupTeam(teamID: 13, teamName: "Germany")
-let Ghana: WorldCupTeam       = WorldCupTeam(teamID: 14, teamName: "Ghana")
-let Iran: WorldCupTeam        = WorldCupTeam(teamID: 15, teamName: "Iran")
-let Japan: WorldCupTeam       = WorldCupTeam(teamID: 16, teamName: "Japan")
-let Mexico: WorldCupTeam      = WorldCupTeam(teamID: 17, teamName: "Mexico")
-let Morocco: WorldCupTeam     = WorldCupTeam(teamID: 18, teamName: "Morocco")
-let Netherlands: WorldCupTeam = WorldCupTeam(teamID: 19, teamName: "Netherlands")
-let Poland: WorldCupTeam      = WorldCupTeam(teamID: 20, teamName: "Poland")
-let Portugal: WorldCupTeam    = WorldCupTeam(teamID: 21, teamName: "Portugal")
-let Qatar: WorldCupTeam       = WorldCupTeam(teamID: 22, teamName: "Qatar")
-let SaudiArabia: WorldCupTeam = WorldCupTeam(teamID: 23, teamName: "Saudi Arabia")
-let Senegal: WorldCupTeam     = WorldCupTeam(teamID: 24, teamName: "Senegal")
-let Serbia: WorldCupTeam      = WorldCupTeam(teamID: 25, teamName: "Serbia")
-let SouthKorea: WorldCupTeam  = WorldCupTeam(teamID: 26, teamName: "South Korea")
-let Spain: WorldCupTeam       = WorldCupTeam(teamID: 27, teamName: "Spain")
-let Switzerland: WorldCupTeam = WorldCupTeam(teamID: 28, teamName: "Switzerland")
-let Tunisia: WorldCupTeam     = WorldCupTeam(teamID: 29, teamName: "Tunisia")
-let Uruguay: WorldCupTeam     = WorldCupTeam(teamID: 30, teamName: "Uruguay")
-let USA: WorldCupTeam         = WorldCupTeam(teamID: 31, teamName: "USA")
-let Wales: WorldCupTeam       = WorldCupTeam(teamID: 32, teamName: "Wales")
+let argentina: WorldCupTeam   = WorldCupTeam(teamID: 1, teamName: "Argentina")
+let australia: WorldCupTeam   = WorldCupTeam(teamID: 2, teamName: "Australia")
+let belgium: WorldCupTeam     = WorldCupTeam(teamID: 3, teamName: "Belgium")
+let brazil: WorldCupTeam      = WorldCupTeam(teamID: 4, teamName: "Brazil")
+let cameroon: WorldCupTeam    = WorldCupTeam(teamID: 5, teamName: "Cameroon")
+let canada: WorldCupTeam      = WorldCupTeam(teamID: 6, teamName: "Canada")
+let costaRica: WorldCupTeam   = WorldCupTeam(teamID: 7, teamName: "Costa Rica")
+let croatia: WorldCupTeam     = WorldCupTeam(teamID: 8, teamName: "Croatia")
+let denmark: WorldCupTeam     = WorldCupTeam(teamID: 9, teamName: "Denmark")
+let ecuador: WorldCupTeam     = WorldCupTeam(teamID: 10, teamName: "Ecuador")
+let england: WorldCupTeam     = WorldCupTeam(teamID: 11, teamName: "England")
+let france: WorldCupTeam      = WorldCupTeam(teamID: 12, teamName: "France")
+let germany: WorldCupTeam     = WorldCupTeam(teamID: 13, teamName: "Germany")
+let ghana: WorldCupTeam       = WorldCupTeam(teamID: 14, teamName: "Ghana")
+let iran: WorldCupTeam        = WorldCupTeam(teamID: 15, teamName: "Iran")
+let japan: WorldCupTeam       = WorldCupTeam(teamID: 16, teamName: "Japan")
+let mexico: WorldCupTeam      = WorldCupTeam(teamID: 17, teamName: "Mexico")
+let morocco: WorldCupTeam     = WorldCupTeam(teamID: 18, teamName: "Morocco")
+let netherlands: WorldCupTeam = WorldCupTeam(teamID: 19, teamName: "Netherlands")
+let poland: WorldCupTeam      = WorldCupTeam(teamID: 20, teamName: "Poland")
+let portugal: WorldCupTeam    = WorldCupTeam(teamID: 21, teamName: "Portugal")
+let qatar: WorldCupTeam       = WorldCupTeam(teamID: 22, teamName: "Qatar")
+let saudiArabia: WorldCupTeam = WorldCupTeam(teamID: 23, teamName: "Saudi Arabia")
+let senegal: WorldCupTeam     = WorldCupTeam(teamID: 24, teamName: "Senegal")
+let serbia: WorldCupTeam      = WorldCupTeam(teamID: 25, teamName: "Serbia")
+let southKorea: WorldCupTeam  = WorldCupTeam(teamID: 26, teamName: "South Korea")
+let spain: WorldCupTeam       = WorldCupTeam(teamID: 27, teamName: "Spain")
+let switzerland: WorldCupTeam = WorldCupTeam(teamID: 28, teamName: "Switzerland")
+let tunisia: WorldCupTeam     = WorldCupTeam(teamID: 29, teamName: "Tunisia")
+let uruguay: WorldCupTeam     = WorldCupTeam(teamID: 30, teamName: "Uruguay")
+let usa: WorldCupTeam         = WorldCupTeam(teamID: 31, teamName: "USA")
+let wales: WorldCupTeam       = WorldCupTeam(teamID: 32, teamName: "Wales")
  
 //USA.initialDraw = 2
-var team1: String = USA.teamName
-var teamNames: [String] = [Argentina.teamName, Australia.teamName, Belgium.teamName, Brazil.teamName, Cameroon.teamName, Canada.teamName, CostaRica.teamName, Croatia.teamName, Denmark.teamName, Ecuador.teamName, England.teamName, France.teamName, Germany.teamName, Ghana.teamName, Iran.teamName, Japan.teamName, Mexico.teamName, Morocco.teamName, Netherlands.teamName, Poland.teamName, Portugal.teamName, Qatar.teamName, SaudiArabia.teamName, Senegal.teamName, Serbia.teamName, SouthKorea.teamName, Spain.teamName, Switzerland.teamName, Tunisia.teamName, Uruguay.teamName, USA.teamName, Wales.teamName]
+var team1: String = usa.teamName
+var teamNames: [String] = [argentina.teamName, australia.teamName, belgium.teamName, brazil.teamName, cameroon.teamName, canada.teamName, costaRica.teamName, croatia.teamName, denmark.teamName, ecuador.teamName, england.teamName, france.teamName, germany.teamName, ghana.teamName, iran.teamName, japan.teamName, mexico.teamName, morocco.teamName, netherlands.teamName, poland.teamName, portugal.teamName, qatar.teamName, saudiArabia.teamName, senegal.teamName, serbia.teamName, southKorea.teamName, spain.teamName, switzerland.teamName, tunisia.teamName, uruguay.teamName, usa.teamName, wales.teamName]
 
 // TODO: not sure how to use this list
-let teams: [WorldCupTeam] = [Argentina, Australia, Belgium, Brazil, Cameroon, Canada, CostaRica, Croatia, Denmark, Ecuador, England, France, Germany, Ghana, Iran, Japan, Mexico, Morocco, Netherlands, Poland, Portugal, Qatar, SaudiArabia, Senegal, Serbia, SouthKorea, Spain, Switzerland, Tunisia, Uruguay, USA, Wales]
+let teams: [WorldCupTeam] = [argentina, australia, belgium, brazil, cameroon, canada, costaRica, croatia, denmark, ecuador, england, france, germany, ghana, iran, japan, mexico, morocco, netherlands, poland, portugal, qatar, saudiArabia, senegal, serbia, southKorea, spain, switzerland, tunisia, uruguay, usa, wales]
 
 // MARK: - #7
 
@@ -293,7 +293,7 @@ class WorldCupMatch {
 }
 
 
-func randomMatches(numberOfMatches: Int) {
+func randomMatches(numberOfMatches: Int) { // use this for func playMatch inside class Match
     
     print("Number of matches: \(numberOfMatches)\n\n")
     var match1 = Int.random(in: 1...numberOfMatches)
@@ -318,9 +318,9 @@ let luckOfTheDraw: () = randomMatches(numberOfMatches: 16)
 func randomMatch (team1: Int, team2: Int) {
     
 }
-
+teamNames
 // Testing section
-print("\(Argentina.teamID)")
+//print("\(argentina.teamId)")
 teams.randomElement()
 
 //not in use
@@ -339,7 +339,8 @@ drawPlacement()
 
 /*
  ES 8.- Generar de forma aleatoria, dentro de la clase Mundial, un listado de grupos con un máximo de 4 selecciones por grupo, se puede crear una clase nueva Grupo que contenga el nombre del grupo, listado de participantes y listado de partidos. Por ejemplo: Grupo A España, Brasil, Francia, Alemania.
- EN 8.- Generate randomly, within the World class, a list of groups with a maximum of 4 teams per group, you can create a new Group class that contains the name of the group, list of participants and list of matches. For example: Group A Spain, Brazil, France, Germany.
+ EN 8.- Generate randomly, within the World class, a list of groups with a maximum of 4 teams per group,
+ you can create a new Group class that contains the name of the group, list of participants and list of matches. For example: Group A Spain, Brazil, France, Germany.
  
  Desired/sample output:
  Group A Spain, Brazil, France, Germany
