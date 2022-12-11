@@ -264,6 +264,10 @@ protocol PlayMatchDelegate: AnyObject { // https://docs.swift.org/swift-book/Lan
     
 }
 
+protocol RoundRobin: AnyObject {
+    func randomMatches(teamsToRandomize: [String], numberOfMatches: Int)
+}
+
 protocol PointKeeper: AnyObject {
     
 }
@@ -292,6 +296,7 @@ class Group {
     var groupId: Int = 0
     var groupName: String = ""
     var groupTeams: [String]? = []
+    weak var delegate: RoundRobin?
     
     init(groupId: Int, groupName: String) {
         self.groupName = groupName
@@ -302,13 +307,24 @@ class Group {
     }
     
     func assignTeamsToGroup () {
+        // see TODO: loop group bucket assignments
+    }
+    
+    func roundRobinWithinGroup () {
+        print("\nStarting Round Robin")
+        print("\(self.groupName): \(self.groupTeams!)")
+        delegate?.randomMatches(teamsToRandomize: self.groupTeams ?? ["Brazil", "Germany", "Netherlands", "England"], numberOfMatches: 3)
+        self.delegate
+        // delegate not working, add function below
         
     }
     
+    // matches within each Group
     func innerGroupMatch () {
         var homeTeam = groupTeams?.randomElement()
         var awayTeam = groupTeams?.randomElement()
         // TODO: Replace func below (used b/c delegate not working...)
+        
         func playInnerGroupMatch (homeTeam: String, awayTeam: String) -> (String, String, Int, Int, String, Int, Int) {
             print("Home team: \(homeTeam)")
             let homeTeamScore = Int.random(in: 0...3)
@@ -361,7 +377,7 @@ class Group {
     }
 }
 
-class World {
+class World: RoundRobin {
     var year: Int = 0
     weak var delegate: PlayMatchDelegate?
     
@@ -369,20 +385,20 @@ class World {
         self.year = year
     }
     
-    func randomMatches(numberOfMatches: Int) { // #7 item
-        
+    func randomMatches(teamsToRandomize: [String], numberOfMatches: Int) { // #7 item
+        //print("test")
         print("Random Matches: \(numberOfMatches)")
-        var shuffledMatches: [String] = teamNames.shuffled() // https://developer.apple.com/documentation/swift/array/shuffle()
-        teamNames // call for debug purposes
+        var shuffledMatches: [String] = teamsToRandomize.shuffled() // https://developer.apple.com/documentation/swift/array/shuffle()
+        teamsToRandomize // call for debug purposes
         shuffledMatches // call for debug purposes
         for n in 1...numberOfMatches {
             var homeTeam = shuffledMatches.randomElement()
             var awayTeam = shuffledMatches.randomElement()
             //var matchX = Match(homeTeam: teamNames.randomElement() ?? "Spain", awayTeam: teamNames.randomElement() ?? "Portugal")
             print("\nRandom match #\(n)") // for debugging
-            print("Before delegate?.playMatch OR playRandom call")
-            print("Home team: \(homeTeam!)")
-            print("Away team: \(awayTeam!)")
+            //print("Before delegate?.playMatch OR playRandom call")
+            //print("Home team: \(homeTeam!)")
+            //print("Away team: \(awayTeam!)")
                         
             // TODO: Replace func below (used b/c delegate not working...)
             func playRandom (homeTeam: String, awayTeam: String) -> (String, String, Int, String, Int) {
@@ -533,12 +549,21 @@ let groupClasses: [AnyObject] = [groupA, groupB, groupC, groupD, groupE, groupF,
 
 // Create WorldCup, divide teams into groups
 let world2022: World = World(year: 2022)
+groupA.delegate = world2022
+groupB.delegate = world2022
+groupC.delegate = world2022
+groupD.delegate = world2022
+groupE.delegate = world2022
+groupF.delegate = world2022
+groupG.delegate = world2022
+groupH.delegate = world2022
+
 groupA.groupName
 groupA.groupTeams
 
 print("\n\n7° Generate a random list of matches from the list of previous teams and make a print of this style per match: Match: Spain 3 - 1 Brazil\n")
 
-world2022.randomMatches(numberOfMatches: 8)
+world2022.randomMatches(teamsToRandomize: teamNames, numberOfMatches: 8)
 
 //let groupAMatches = Group()
 teamNames // for debugging purposes
@@ -547,8 +572,10 @@ let drawBuckets: [[String]] = world2022.divideTeams(teamsToDivide: teamNames) //
 
 print("\n\n8° Generate randomly, within the World class, a list of groups with a maximum of 4 teams per group. For example: Group A Spain, Brazil, France, Germany. \n")
 groupClasses[1] // for debugging
-groupClasses.forEach { Group in // attempting to loop assignments below
-    print("\(Group)")
+
+// TODO: loop group bucket assignments
+groupClasses.forEach { Group in
+    //print("\(Group.)")
 }
 groupA.groupTeams = drawBuckets[0]
 print("Group A teams: \(groupA.groupTeams!)")
@@ -566,7 +593,11 @@ groupG.groupTeams = drawBuckets[6]
 print("Group G teams: \(groupG.groupTeams!)")
 groupH.groupTeams = drawBuckets[7]
 print("Group H teams: \(groupH.groupTeams!)")
+
 teamNames
+groupA.groupTeams
+groupA.innerGroupMatch()
+
 
 let match1 = Match(homeTeam: "usa", awayTeam: "spain")
 match1.playMatch(homeTeam: "usa", awayTeam: "Spain")
@@ -579,6 +610,10 @@ print("\n\n9° To add the points of each team to each Group, victories = 3 pts, 
 groupA.innerGroupMatch()
 
 usa.teamPoints
+
+
+groupA.roundRobinWithinGroup()
+groupA.delegate
 
 /*
  ES 9.- Para añadir a cada Grupo los puntos de cada selección habrá que contabilizar las victorias con 3 puntos, empates con 1 y derrotas con 0. Añadir una función en la clase Grupo que le pasemos una selección y nos devuelva sus puntos.
