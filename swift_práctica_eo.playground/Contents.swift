@@ -314,9 +314,9 @@ class Group {
         print("\nStarting Round Robin")
         print("\(self.groupName): \(self.groupTeams!)")
         delegate?.randomMatches(teamsToRandomize: self.groupTeams ?? ["Brazil", "Germany", "Netherlands", "England"], numberOfMatches: 3)
-        self.delegate
+        //self.delegate
         // delegate not working, add function below
-        
+        print("End Round Robin: \(self.groupName)")
     }
     
     // matches within each Group
@@ -401,26 +401,39 @@ class World: RoundRobin {
             //print("Away team: \(awayTeam!)")
                         
             // TODO: Replace func below (used b/c delegate not working...)
-            func playRandom (homeTeam: String, awayTeam: String) -> (String, String, Int, String, Int) {
+            // also see class Group > func innerGroupMatch > func playInnerGroupMatch
+            // this fuction used in production
+            func playRandom (homeTeam: String, awayTeam: String) -> (String, String, Int, Int, String, Int, Int) {
                 print("Home team: \(homeTeam)")
                 let homeTeamScore = Int.random(in: 0...3)
                 print("Home team score: \(homeTeamScore)")
+                var homeTeamAwardPoints: Int = 0
+                
                 print("Away team: \(awayTeam)")
                 let awayTeamScore = Int.random(in: 0...3)
                 print("Away team score: \(awayTeamScore)")
+                var awayTeamAwardPoints: Int = 0
+                
                 var winner: String = ""
+                let winnerAwardPoints: Int = 3
+                let drawAwardPoints: Int = 1
                 
                 if homeTeamScore > awayTeamScore {
                     winner = homeTeam
+                    homeTeamAwardPoints = winnerAwardPoints
+                    // delgate out score updater
                 } else if homeTeamScore < awayTeamScore {
                     winner = awayTeam
+                    awayTeamAwardPoints = winnerAwardPoints
                 } else {
                     winner = "Tie game"
+                    homeTeamAwardPoints = drawAwardPoints
+                    homeTeamAwardPoints = drawAwardPoints
                 }
                 
                 print("\(homeTeam) \(homeTeamScore) - \(awayTeam) \(awayTeamScore)")
                 
-                return (winner, homeTeam, homeTeamScore, awayTeam, awayTeamScore)
+                return (winner, homeTeam, homeTeamScore, homeTeamAwardPoints, awayTeam, awayTeamScore, awayTeamAwardPoints)
             }
             playRandom(homeTeam: homeTeam ?? "USA", awayTeam: awayTeam ?? "Mexico")
             //delegate?.playMatch (homeTeam: homeTeam ?? "USA", awayTeam: awayTeam ?? "Mexico")
@@ -549,7 +562,7 @@ let groupClasses: [AnyObject] = [groupA, groupB, groupC, groupD, groupE, groupF,
 
 // Create WorldCup, divide teams into groups
 let world2022: World = World(year: 2022)
-groupA.delegate = world2022
+groupA.delegate = world2022 // this instance of Group needs to execute a delegated function
 groupB.delegate = world2022
 groupC.delegate = world2022
 groupD.delegate = world2022
@@ -557,6 +570,15 @@ groupE.delegate = world2022
 groupF.delegate = world2022
 groupG.delegate = world2022
 groupH.delegate = world2022
+//world2022.delegate = groupA
+//world2022.delegate = groupB
+//world2022.delegate = groupC
+//world2022.delegate = groupD
+//world2022.delegate = groupE
+//world2022.delegate = groupF
+//world2022.delegate = groupG
+//world2022.delegate = groupH
+
 
 groupA.groupName
 groupA.groupTeams
@@ -613,7 +635,43 @@ usa.teamPoints
 
 
 groupA.roundRobinWithinGroup()
-groupA.delegate
+groupA
+usa.teamPoints
+
+argentina.teamPoints
+australia.teamPoints
+belgium.teamPoints
+brazil.teamPoints
+cameroon.teamPoints
+canada.teamPoints
+costaRica.teamPoints
+croatia.teamPoints
+denmark.teamPoints
+ecuador.teamPoints
+england.teamPoints
+france.teamPoints
+germany.teamPoints
+ghana.teamPoints
+iran.teamPoints
+japan.teamPoints
+mexico.teamPoints
+morocco.teamPoints
+netherlands.teamPoints
+poland.teamPoints
+portugal.teamPoints
+qatar.teamPoints
+saudiArabia.teamPoints
+senegal.teamPoints
+serbia.teamPoints
+southKorea.teamPoints
+spain.teamPoints
+switzerland.teamPoints
+tunisia.teamPoints
+uruguay.teamPoints
+usa.teamPoints
+wales.teamPoints
+
+//groupA.delegate
 
 /*
  ES 9.- Para añadir a cada Grupo los puntos de cada selección habrá que contabilizar las victorias con 3 puntos, empates con 1 y derrotas con 0. Añadir una función en la clase Grupo que le pasemos una selección y nos devuelva sus puntos.
